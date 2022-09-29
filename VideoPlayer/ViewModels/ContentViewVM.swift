@@ -29,6 +29,7 @@ class ContentViewVM: ObservableObject {
     var timeObserverToken: Any?
     let group = DispatchGroup()
     var videosCount = 0
+    var tempVideos = [Video]()
 
     init() {
         do {
@@ -58,9 +59,8 @@ class ContentViewVM: ObservableObject {
     }
 
     func onAppear() {
-        videos.sort(by: { $0.id > $1.id })
-        player = AVPlayer(url: videos.first(where: { $0.id == currentVideo })!.url)
-        print(settings.currentTime)
+        videos = tempVideos.sorted(by: { $0.id < $1.id })
+        player = AVPlayer(url: videos.first(where: { $0.id == settings.currentVideoIndex })!.url)
         player.seek(to: CMTime(seconds: settings.currentTime, preferredTimescale: 1))
 
         NotificationCenter.default.addObserver(forName: NSApplication.willTerminateNotification, object: nil, queue: .main) { _ in
@@ -78,7 +78,7 @@ class ContentViewVM: ObservableObject {
         assetImgGenerate.generateCGImageAsynchronously(for: time) { cgImage, time, error in
             guard let cgImage else {
                 DispatchQueue.main.async {
-                    self.videos.append(
+                    self.tempVideos.append(
                         Video(id: id, url: url, thumbnail: Image(systemName: "exclamationmark.circle"))
                     )
                 }
@@ -88,9 +88,9 @@ class ContentViewVM: ObservableObject {
             let nsImage = NSImage(cgImage: cgImage, size: .zero)
             let image = Image(nsImage: nsImage)
 
-            self.videos.append(Video(id: id, url: url, thumbnail: image))
+            self.tempVideos.append(Video(id: id, url: url, thumbnail: image))
 
-            if self.videosCount == self.videos.count {
+            if self.videosCount == self.tempVideos.count {
                 self.group.leave()
             }
         }
@@ -140,8 +140,9 @@ class ContentViewVM: ObservableObject {
         )
 
         videos.removeAll()
+        tempVideos.removeAll()
 
-        let folderVideos = folderContents.compactMap { url in
+        var folderVideos = folderContents.compactMap { url in
             if url.isFileURL && url.isVideo {
                 return url
             }
@@ -151,7 +152,12 @@ class ContentViewVM: ObservableObject {
 
         group.enter()
 
-        folderVideos.enumerated().forEach { index, url in
+        folderVideos
+            .sorted(by: {
+                $0.lastPathComponent < $1.lastPathComponent
+            })
+            .enumerated()
+            .forEach { index, url in
             addVideo(with: index, from: url)
         }
 
@@ -178,6 +184,8 @@ class ContentViewVM: ObservableObject {
                     currentTime: 0
                 )
                 bookmarks.store(url: url)
+
+                print(url)
 
                 do {
                     try loadVideos(from: url)
