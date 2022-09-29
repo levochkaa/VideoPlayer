@@ -12,7 +12,6 @@ struct KeyEventHandling: NSViewRepresentable {
 
         override var acceptsFirstResponder: Bool { true }
         override func keyDown(with event: NSEvent) {
-//            print(event.keyCode)
             switch event.keyCode {
                 case 126: // up arrow
                     viewModel?.selectFolder()
