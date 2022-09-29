@@ -6,7 +6,6 @@ struct Config: Codable {
     var backward: GoWard = .five
     var forward: GoWard = .five
     var currentFolder: URL? = nil
-    var currentVideoIndex: Int = 0
 
     enum GoWard: Int, Codable {
         case five = 5

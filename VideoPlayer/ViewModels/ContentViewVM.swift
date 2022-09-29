@@ -14,11 +14,7 @@ class ContentViewVM: ObservableObject {
     }
     @Published var videos = [Video]()
     @Published var isPlaying = false
-    @Published var currentVideo: Int = 0 {
-        didSet {
-            self.settings.currentVideoIndex = currentVideo
-        }
-    }
+    @Published var currentVideo: Int = 0
     @Published var settings: Config {
         didSet {
             self.save()
@@ -148,7 +144,11 @@ class ContentViewVM: ObservableObject {
             case .OK:
                 guard let url = panel.url else { return print("Error getting url") }
 
-                settings.currentFolder = url
+                settings = Config(
+                    backward: settings.backward,
+                    forward: settings.forward,
+                    currentFolder: url
+                )
                 bookmarks.store(url: url)
 
                 do {
