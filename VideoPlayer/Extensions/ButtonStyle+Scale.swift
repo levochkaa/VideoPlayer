@@ -1,0 +1,11 @@
+// ButtonStyle+Scale.swift
+
+import SwiftUI
+
+struct ScaleButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.85 : 1)
+            .animation(.default, value: configuration.isPressed)
+    }
+}
