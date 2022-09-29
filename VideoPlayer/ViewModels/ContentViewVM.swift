@@ -14,7 +14,11 @@ class ContentViewVM: ObservableObject {
     }
     @Published var videos = [Video]()
     @Published var isPlaying = false
-    @Published var currentVideo: Int = 0
+    @Published var currentVideo: Int = 0 {
+        didSet {
+            self.settings.currentVideoIndex = currentVideo
+        }
+    }
     @Published var settings: Config {
         didSet {
             self.save()
@@ -22,6 +26,9 @@ class ContentViewVM: ObservableObject {
     }
 
     let bookmarks = BookMarks.restore() ?? BookMarks(data: [:])
+    var timeObserverToken: Any?
+    let group = DispatchGroup()
+    var videosCount = 0
 
     init() {
         do {
@@ -33,6 +40,7 @@ class ContentViewVM: ObservableObject {
                 return
             }
             settings = try JSONDecoder().decode(Config.self, from: data)
+            currentVideo = settings.currentVideoIndex
 
             if let folder = settings.currentFolder {
                 try loadVideos(from: folder)
@@ -49,6 +57,17 @@ class ContentViewVM: ObservableObject {
         selectFolder()
     }
 
+    func onAppear() {
+        videos.sort(by: { $0.id > $1.id })
+        player = AVPlayer(url: videos.first(where: { $0.id == currentVideo })!.url)
+        print(settings.currentTime)
+        player.seek(to: CMTime(seconds: settings.currentTime, preferredTimescale: 1))
+
+        NotificationCenter.default.addObserver(forName: NSApplication.willTerminateNotification, object: nil, queue: .main) { _ in
+            self.settings.currentTime = self.player.currentTime().seconds
+        }
+    }
+
     func addVideo(with id: Int, from url: URL) {
         let asset = AVAsset(url: url)
         let assetImgGenerate = AVAssetImageGenerator(asset: asset)
@@ -62,7 +81,6 @@ class ContentViewVM: ObservableObject {
                     self.videos.append(
                         Video(id: id, url: url, thumbnail: Image(systemName: "exclamationmark.circle"))
                     )
-                    self.videos.sort(by: { $0.id > $1.id })
                 }
                 return print("Error loading thumbnail")
             }
@@ -70,9 +88,10 @@ class ContentViewVM: ObservableObject {
             let nsImage = NSImage(cgImage: cgImage, size: .zero)
             let image = Image(nsImage: nsImage)
 
-            DispatchQueue.main.async {
-                self.videos.append(Video(id: id, url: url, thumbnail: image))
-                self.videos.sort(by: { $0.id < $1.id })
+            self.videos.append(Video(id: id, url: url, thumbnail: image))
+
+            if self.videosCount == self.videos.count {
+                self.group.leave()
             }
         }
     }
@@ -122,16 +141,23 @@ class ContentViewVM: ObservableObject {
 
         videos.removeAll()
 
-        folderContents.enumerated().forEach { index, url in
-            guard url.isFileURL && url.isVideo else { return }
+        let folderVideos = folderContents.compactMap { url in
+            if url.isFileURL && url.isVideo {
+                return url
+            }
+            return nil
+        }
+        videosCount = folderVideos.count
+
+        group.enter()
+
+        folderVideos.enumerated().forEach { index, url in
             addVideo(with: index, from: url)
         }
 
-        guard let url = folderContents.first(where: { $0.isFileURL && $0.isVideo }) else {
-            return print("Error getting first video")
-        }
+        group.wait()
 
-        player = AVPlayer(url: url)
+        onAppear()
     }
 
     func selectFolder() {
@@ -147,7 +173,9 @@ class ContentViewVM: ObservableObject {
                 settings = Config(
                     backward: settings.backward,
                     forward: settings.forward,
-                    currentFolder: url
+                    currentFolder: url,
+                    currentVideoIndex: 0,
+                    currentTime: 0
                 )
                 bookmarks.store(url: url)
 
