@@ -185,8 +185,6 @@ class ContentViewVM: ObservableObject {
                 )
                 bookmarks.store(url: url)
 
-                print(url)
-
                 do {
                     try loadVideos(from: url)
                 } catch {
