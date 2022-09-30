@@ -12,15 +12,16 @@ struct KeyEventHandling: NSViewRepresentable {
 
         override var acceptsFirstResponder: Bool { true }
         override func keyDown(with event: NSEvent) {
+            guard let viewModel else { return }
             switch event.keyCode {
                 case 126: // up arrow
-                    viewModel?.selectFolder()
+                    viewModel.selectFolder()
                 case 124: // right arrow
-                    viewModel?.skipForward()
+                    viewModel.skipForward()
                 case 123: // left arrow
-                    viewModel?.skipBackward()
+                    viewModel.skipBackward()
                 case 49: // space
-                    viewModel?.pause()
+                    viewModel.isPlaying ? viewModel.pause() : viewModel.play()
                 default:
                     break
             }

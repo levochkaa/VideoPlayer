@@ -142,7 +142,7 @@ class ContentViewVM: ObservableObject {
         videos.removeAll()
         tempVideos.removeAll()
 
-        var folderVideos = folderContents.compactMap { url in
+        let folderVideos = folderContents.compactMap { url in
             if url.isFileURL && url.isVideo {
                 return url
             }
