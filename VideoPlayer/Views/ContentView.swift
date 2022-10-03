@@ -2,12 +2,14 @@
 
 import SwiftUI
 import AVKit
+import SwiftUIKeyPress
 
 struct ContentView: View {
 
     @ObservedObject var viewModel: ContentViewVM
 
     @State private var showVideos = false
+    @State private var keys = [UIKey]()
 
     var body: some View {
         VStack {
@@ -37,6 +39,21 @@ struct ContentView: View {
         .navigationTitle(viewModel.videos[viewModel.currentVideo].url.lastPathComponent)
         .onChange(of: viewModel.currentVideo) { id in
             viewModel.setVideo(for: id)
+        }
+        .onKeyPress($keys)
+        .onChange(of: keys) { newValue in
+            switch newValue.last!.event.keyCode {
+                case 126: // up arrow
+                    viewModel.selectFolder()
+                case 124: // right arrow
+                    viewModel.skipForward()
+                case 123: // left arrow
+                    viewModel.skipBackward()
+                case 49: // space
+                    viewModel.isPlaying ? viewModel.pause() : viewModel.play()
+                default:
+                    break
+            }
         }
     }
 

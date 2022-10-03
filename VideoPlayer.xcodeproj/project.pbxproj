@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DF3217FB28E60D5800FD3B8E /* KeyEventHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3217FA28E60D5800FD3B8E /* KeyEventHandling.swift */; };
 		DF3217FD28E615EA00FD3B8E /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3217FC28E615EA00FD3B8E /* Video.swift */; };
+		DF3B66E928EB0294005DBFE6 /* SwiftUIKeyPress in Frameworks */ = {isa = PBXBuildFile; productRef = DF3B66E828EB0294005DBFE6 /* SwiftUIKeyPress */; };
 		DFF020BB28E23D7F0025C485 /* VideoPlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF020BA28E23D7F0025C485 /* VideoPlayerApp.swift */; };
 		DFF020BD28E23D7F0025C485 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF020BC28E23D7F0025C485 /* ContentView.swift */; };
 		DFF020BF28E23D800025C485 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFF020BE28E23D800025C485 /* Assets.xcassets */; };
@@ -22,7 +22,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DF3217FA28E60D5800FD3B8E /* KeyEventHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEventHandling.swift; sourceTree = "<group>"; };
 		DF3217FC28E615EA00FD3B8E /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		DFF020B728E23D7F0025C485 /* VideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFF020BA28E23D7F0025C485 /* VideoPlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerApp.swift; sourceTree = "<group>"; };
@@ -43,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF3B66E928EB0294005DBFE6 /* SwiftUIKeyPress in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,7 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				DFF020CD28E390B40025C485 /* Bookmarks.swift */,
-				DF3217FA28E60D5800FD3B8E /* KeyEventHandling.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -149,6 +148,9 @@
 			dependencies = (
 			);
 			name = VideoPlayer;
+			packageProductDependencies = (
+				DF3B66E828EB0294005DBFE6 /* SwiftUIKeyPress */,
+			);
 			productName = VideoPlayer;
 			productReference = DFF020B728E23D7F0025C485 /* VideoPlayer.app */;
 			productType = "com.apple.product-type.application";
@@ -177,6 +179,9 @@
 				Base,
 			);
 			mainGroup = DFF020AE28E23D7F0025C485;
+			packageReferences = (
+				DF3B66E728EB0294005DBFE6 /* XCRemoteSwiftPackageReference "SwiftUIKeyPress" */,
+			);
 			productRefGroup = DFF020B828E23D7F0025C485 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -205,7 +210,6 @@
 			files = (
 				DFF020CA28E3904B0025C485 /* ContentViewVM.swift in Sources */,
 				DFF020CE28E390B40025C485 /* Bookmarks.swift in Sources */,
-				DF3217FB28E60D5800FD3B8E /* KeyEventHandling.swift in Sources */,
 				DFF020D428E42EF50025C485 /* ButtonStyle+Scale.swift in Sources */,
 				DFF020CC28E390780025C485 /* Config.swift in Sources */,
 				DFF020BD28E23D7F0025C485 /* ContentView.swift in Sources */,
@@ -408,6 +412,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DF3B66E728EB0294005DBFE6 /* XCRemoteSwiftPackageReference "SwiftUIKeyPress" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/underthestars-zhy/SwiftUIKeyPress";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DF3B66E828EB0294005DBFE6 /* SwiftUIKeyPress */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DF3B66E728EB0294005DBFE6 /* XCRemoteSwiftPackageReference "SwiftUIKeyPress" */;
+			productName = SwiftUIKeyPress;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DFF020AF28E23D7F0025C485 /* Project object */;
 }

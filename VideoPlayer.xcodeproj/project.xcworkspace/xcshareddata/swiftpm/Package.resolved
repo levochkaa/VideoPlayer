@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "swiftuikeypress",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/underthestars-zhy/SwiftUIKeyPress",
+      "state" : {
+        "branch" : "main",
+        "revision" : "1e3fb0f25916bd6305b71ee763e9e5226049aabc"
+      }
+    }
+  ],
+  "version" : 2
+}
