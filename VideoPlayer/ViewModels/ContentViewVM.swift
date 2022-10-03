@@ -99,13 +99,13 @@ class ContentViewVM: ObservableObject {
     func skipForward() {
         player.seek(to: player.currentTime() + CMTime(seconds: Double(settings.forward.rawValue),
                                                       preferredTimescale: CMTimeScale(1)))
-        player.play()
+        play()
     }
 
     func skipBackward() {
         player.seek(to: player.currentTime() - CMTime(seconds: Double(settings.backward.rawValue),
                                                       preferredTimescale: CMTimeScale(1)))
-        player.play()
+        play()
     }
 
     func setVideo(for id: Int) {
