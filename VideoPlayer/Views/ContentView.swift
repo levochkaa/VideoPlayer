@@ -89,12 +89,12 @@ struct ContentView: View {
             }
             .onAppear {
                 withAnimation {
-                    proxy.scrollTo(viewModel.currentVideo)
+                    proxy.scrollTo(viewModel.currentVideo, anchor: .center)
                 }
             }
             .onChange(of: viewModel.currentVideo) { currentVideo in
                 withAnimation {
-                    proxy.scrollTo(currentVideo)
+                    proxy.scrollTo(currentVideo, anchor: .center)
                 }
             }
         }
