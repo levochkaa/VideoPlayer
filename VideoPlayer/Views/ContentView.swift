@@ -5,7 +5,7 @@ import AVKit
 
 struct ContentView: View {
 
-    @StateObject var viewModel = ContentViewVM()
+    @ObservedObject var viewModel: ContentViewVM
 
     @State private var showVideos = false
 
@@ -34,9 +34,7 @@ struct ContentView: View {
                     }
                 }
         }
-        .background(
-            KeyEventHandling(viewModel: viewModel)
-        )
+        .navigationTitle(viewModel.videos[viewModel.currentVideo].url.lastPathComponent)
         .onChange(of: viewModel.currentVideo) { id in
             viewModel.setVideo(for: id)
         }
