@@ -2,6 +2,7 @@
 
 import SwiftUI
 import AVKit
+import SwiftUIKeyPress
 
 class ContentViewVM: ObservableObject {
     @Published var player = AVPlayer() {
@@ -56,6 +57,25 @@ class ContentViewVM: ObservableObject {
 
         settings = Config()
         selectFolder()
+    }
+
+    func keyPressed(_ key: UIKey) {
+        switch key.event.keyCode {
+            case 126: // up arrow
+                player.rate += 0.25
+            case 125: // down arrow
+                player.rate -= 0.25
+            case 124: // right arrow
+                skipForward()
+            case 123: // left arrow
+                skipBackward()
+            case 49: // space
+                isPlaying ? pause() : play()
+            case 53: // escape
+                selectFolder()
+            default:
+                break
+        }
     }
 
     func onAppear() {

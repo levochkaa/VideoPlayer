@@ -42,18 +42,7 @@ struct ContentView: View {
         }
         .onKeyPress($keys)
         .onChange(of: keys) { newValue in
-            switch newValue.last!.event.keyCode {
-                case 126: // up arrow
-                    viewModel.selectFolder()
-                case 124: // right arrow
-                    viewModel.skipForward()
-                case 123: // left arrow
-                    viewModel.skipBackward()
-                case 49: // space
-                    viewModel.isPlaying ? viewModel.pause() : viewModel.play()
-                default:
-                    break
-            }
+            viewModel.keyPressed(newValue.last!)
         }
     }
 
