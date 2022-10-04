@@ -8,6 +8,7 @@ struct Config: Codable {
     var currentFolder: URL? = nil
     var currentVideoIndex: Int = 0
     var currentTime: Double = 0
+    var currentRate: Float = 1
 
     enum GoWard: Int, Codable {
         case five = 5

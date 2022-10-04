@@ -62,9 +62,9 @@ class ContentViewVM: ObservableObject {
     func keyPressed(_ key: UIKey) {
         switch key.event.keyCode {
             case 126: // up arrow
-                player.rate += 0.25
+                changeRate(to: 0.25)
             case 125: // down arrow
-                player.rate -= 0.25
+                changeRate(to: -0.25)
             case 124: // right arrow
                 skipForward()
             case 123: // left arrow
@@ -81,11 +81,17 @@ class ContentViewVM: ObservableObject {
     func onAppear() {
         videos = tempVideos.sorted(by: { $0.id < $1.id })
         player = AVPlayer(url: videos.first(where: { $0.id == settings.currentVideoIndex })!.url)
+        player.rate = settings.currentRate
         player.seek(to: CMTime(seconds: settings.currentTime, preferredTimescale: 1))
 
         NotificationCenter.default.addObserver(forName: NSApplication.willTerminateNotification, object: nil, queue: .main) { _ in
             self.settings.currentTime = self.player.currentTime().seconds
         }
+    }
+
+    func changeRate(to rate: Float) {
+        player.rate += rate
+        settings.currentRate += rate
     }
 
     func addVideo(with id: Int, from url: URL) {
@@ -203,7 +209,8 @@ class ContentViewVM: ObservableObject {
                     forward: settings.forward,
                     currentFolder: url,
                     currentVideoIndex: 0,
-                    currentTime: 0
+                    currentTime: 0,
+                    currentRate: settings.currentRate
                 )
                 bookmarks.store(url: url)
 
