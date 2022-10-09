@@ -87,6 +87,12 @@ struct ContentView: View {
                                 RoundedRectangle(cornerRadius: 20)
                                     .stroke(video.id == viewModel.currentVideo ? .red : .white, lineWidth: 2)
                             }
+                            .overlay {
+                                Text(video.url.lastPathComponent[0..<3])
+                                    .font(.system(.largeTitle, design: .rounded, weight: .bold))
+                                    .foregroundColor(.gray)
+                                    .opacity(0.5)
+                            }
                             .onTapGesture {
                                 viewModel.currentVideo = video.id
                             }

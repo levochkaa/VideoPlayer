@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DF3217FD28E615EA00FD3B8E /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3217FC28E615EA00FD3B8E /* Video.swift */; };
 		DF3B66E928EB0294005DBFE6 /* SwiftUIKeyPress in Frameworks */ = {isa = PBXBuildFile; productRef = DF3B66E828EB0294005DBFE6 /* SwiftUIKeyPress */; };
+		DFBD905128F2BAAD0049114B /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBD905028F2BAAD0049114B /* String+Subscript.swift */; };
 		DFF020BB28E23D7F0025C485 /* VideoPlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF020BA28E23D7F0025C485 /* VideoPlayerApp.swift */; };
 		DFF020BD28E23D7F0025C485 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF020BC28E23D7F0025C485 /* ContentView.swift */; };
 		DFF020BF28E23D800025C485 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFF020BE28E23D800025C485 /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		DF3217FC28E615EA00FD3B8E /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		DFBD905028F2BAAD0049114B /* String+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Subscript.swift"; sourceTree = "<group>"; };
 		DFF020B728E23D7F0025C485 /* VideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFF020BA28E23D7F0025C485 /* VideoPlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerApp.swift; sourceTree = "<group>"; };
 		DFF020BC28E23D7F0025C485 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 			children = (
 				DFF020D128E390E40025C485 /* URL+isVideo.swift */,
 				DFF020D328E42EF50025C485 /* ButtonStyle+Scale.swift */,
+				DFBD905028F2BAAD0049114B /* String+Subscript.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				DFF020D228E390E40025C485 /* URL+isVideo.swift in Sources */,
 				DFF020BB28E23D7F0025C485 /* VideoPlayerApp.swift in Sources */,
 				DFF020D028E390CE0025C485 /* PlayerView.swift in Sources */,
+				DFBD905128F2BAAD0049114B /* String+Subscript.swift in Sources */,
 				DF3217FD28E615EA00FD3B8E /* Video.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
