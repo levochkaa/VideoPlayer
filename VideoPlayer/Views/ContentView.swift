@@ -14,15 +14,15 @@ struct ContentView: View {
     var body: some View {
         VStack {
             CustomVideoPlayer(player: viewModel.player)
-                .overlay(alignment: .bottom) {
+                .overlay(alignment: .top) {
                     Group {
                         if showVideos {
                             videosScroll()
-                                .transition(.move(edge: .bottom))
+                                .transition(.move(edge: .top))
                         } else {
                             videosScroll()
-                                .offset(x: 0, y: 100)
-                                .transition(.move(edge: .bottom))
+                                .offset(x: 0, y: -100)
+                                .transition(.move(edge: .top))
                         }
                     }
                     .animation(.default, value: showVideos)
