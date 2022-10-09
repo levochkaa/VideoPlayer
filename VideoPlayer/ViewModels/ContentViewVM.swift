@@ -140,6 +140,7 @@ class ContentViewVM: ObservableObject {
         }
 
         player = AVPlayer(url: video.url)
+        player.rate = settings.currentRate
     }
 
     func save() {
