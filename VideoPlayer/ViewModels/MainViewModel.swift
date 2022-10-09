@@ -1,10 +1,10 @@
-// ContentViewVM.swift
+// MainViewModel.swift
 
 import SwiftUI
 import AVKit
 import SwiftUIKeyPress
 
-class ContentViewVM: ObservableObject {
+class MainViewModel: ObservableObject {
     @Published var player = AVPlayer() {
         willSet {
             self.pause()
@@ -91,7 +91,7 @@ class ContentViewVM: ObservableObject {
 
     func changeRate(to rate: Float) {
         player.rate += rate
-        settings.currentRate += rate
+        settings.currentRate = player.rate
     }
 
     func addVideo(with id: Int, from url: URL) {

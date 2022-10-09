@@ -6,7 +6,7 @@ import SwiftUIKeyPress
 
 struct ContentView: View {
 
-    @ObservedObject var viewModel: ContentViewVM
+    @ObservedObject var viewModel: MainViewModel
 
     @State private var showVideos = false
     @State private var keys = [UIKey]()
