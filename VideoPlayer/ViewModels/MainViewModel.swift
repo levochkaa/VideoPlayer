@@ -123,14 +123,12 @@ class MainViewModel: ObservableObject {
     }
 
     func skipForward() {
-        player.seek(to: player.currentTime() + CMTime(seconds: Double(settings.forward.rawValue),
-                                                      preferredTimescale: CMTimeScale(1)))
+        player.seek(to: player.currentTime() + CMTime(seconds: Double(settings.forward.rawValue), preferredTimescale: CMTimeScale(1)))
         play()
     }
 
     func skipBackward() {
-        player.seek(to: player.currentTime() - CMTime(seconds: Double(settings.backward.rawValue),
-                                                      preferredTimescale: CMTimeScale(1)))
+        player.seek(to: player.currentTime() - CMTime(seconds: Double(settings.backward.rawValue), preferredTimescale: CMTimeScale(1)))
         play()
     }
 
