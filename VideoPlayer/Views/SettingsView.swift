@@ -18,6 +18,13 @@ struct SettingsView: View {
 
             Text("Backward: -\(viewModel.settings.backward.rawValue) seconds")
             Text("Forward: +\(viewModel.settings.backward.rawValue) seconds")
+
+            Button {
+                viewModel.openCurrentFolder()
+            } label: {
+                Text("Open current folder")
+            }
+            .buttonStyle(.link)
         }
         .frame(width: 800, height: 500)
         .navigationTitle(replacedAbsoluteString)

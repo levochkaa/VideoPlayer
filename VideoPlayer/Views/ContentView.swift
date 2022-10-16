@@ -41,11 +41,17 @@ struct ContentView: View {
             viewModel.setVideo(for: id)
         }
         .onKeyPress($keys)
-        .onChange(of: keys) { newValue in
-            viewModel.keyPressed(newValue.last!)
+        .onChange(of: keys) { newKeys in
+            viewModel.keyPressed(newKeys.last!)
+        }
+        .onChange(of: viewModel.player.rate) { newRate in
+            if newRate == 1 {
+                viewModel.player.rate = viewModel.settings.currentRate
+            }
         }
     }
 
+    // Not used 'cause i hate control buttons and love keybindings
     @ViewBuilder func controlButtons() -> some View {
         HStack {
             Button {
