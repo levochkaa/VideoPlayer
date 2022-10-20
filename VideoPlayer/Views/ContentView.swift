@@ -35,6 +35,14 @@ struct ContentView: View {
                         }
                     }
                 }
+//                .overlay(alignment: .bottom) {
+//                    HStack {
+//                        Spacer()
+//                        RoundedRectangle(cornerRadius: 20)
+//                            .trim(from: 0, to: viewModel.player.currentTime().seconds)
+//                        Spacer()
+//                    }
+//                }
         }
         .navigationTitle(viewModel.videos[viewModel.currentVideo].url.lastPathComponent)
         .onChange(of: viewModel.currentVideo) { id in

@@ -71,7 +71,7 @@ class MainViewModel: ObservableObject {
                 skipBackward()
             case 49: // space
                 isPlaying ? pause() : play()
-            case 53: // escape
+            case 44: // right slash
                 selectFolder()
             default:
                 break
