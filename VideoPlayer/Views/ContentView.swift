@@ -17,10 +17,10 @@ struct ContentView: View {
                 .overlay(alignment: .top) {
                     Group {
                         if showVideos {
-                            videosScroll()
+                            videosScroll
                                 .transition(.move(edge: .top))
                         } else {
-                            videosScroll()
+                            videosScroll
                                 .offset(x: 0, y: -100)
                                 .transition(.move(edge: .top))
                         }
@@ -35,17 +35,9 @@ struct ContentView: View {
                         }
                     }
                 }
-//                .overlay(alignment: .bottom) {
-//                    HStack {
-//                        Spacer()
-//                        RoundedRectangle(cornerRadius: 20)
-//                            .trim(from: 0, to: viewModel.player.currentTime().seconds)
-//                        Spacer()
-//                    }
-//                }
         }
-        .navigationTitle(viewModel.videos[viewModel.currentVideo].url.lastPathComponent)
-        .onChange(of: viewModel.currentVideo) { id in
+        .navigationTitle(viewModel.videos[viewModel.settings.currentVideoIndex].url.lastPathComponent)
+        .onChange(of: viewModel.settings.currentVideoIndex) { id in
             viewModel.setVideo(for: id)
         }
         .onKeyPress($keys)
@@ -59,8 +51,8 @@ struct ContentView: View {
         }
     }
 
-    // Not used 'cause i hate control buttons and love keybindings
-    @ViewBuilder func controlButtons() -> some View {
+    // Not used 'cause i hate control buttons and love hotkeys
+    @ViewBuilder var controlButtons: some View {
         HStack {
             Button {
                 viewModel.skipBackward()
@@ -86,7 +78,7 @@ struct ContentView: View {
         .buttonStyle(ScaleButtonStyle())
     }
 
-    @ViewBuilder func videosScroll() -> some View {
+    @ViewBuilder var videosScroll: some View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
@@ -99,28 +91,33 @@ struct ContentView: View {
                             .cornerRadius(20)
                             .overlay {
                                 RoundedRectangle(cornerRadius: 20)
-                                    .stroke(video.id == viewModel.currentVideo ? .red : .white, lineWidth: 2)
+                                    .stroke(video.id == viewModel.settings.currentVideoIndex
+                                            ? .red
+                                            : .white,
+                                            lineWidth: 2)
                             }
                             .overlay {
-                                Text(video.url.lastPathComponent[0..<3])
-                                    .font(.system(.largeTitle, design: .rounded, weight: .bold))
-                                    .foregroundColor(.gray)
-                                    .opacity(0.5)
+                                if viewModel.settings.videoOverlayOn {
+                                    Text(video.url.lastPathComponent[0..<viewModel.settings.videoOverlayCharactersCount])
+                                        .font(.system(.largeTitle, design: .rounded, weight: .bold))
+                                        .foregroundColor(.gray)
+                                        .opacity(0.5)
+                                }
                             }
                             .onTapGesture {
-                                viewModel.currentVideo = video.id
+                                viewModel.settings.currentVideoIndex = video.id
                             }
                     }
                 }
             }
             .onAppear {
                 withAnimation {
-                    proxy.scrollTo(viewModel.currentVideo, anchor: .center)
+                    proxy.scrollTo(viewModel.settings.currentVideoIndex, anchor: .center)
                 }
             }
-            .onChange(of: viewModel.currentVideo) { currentVideo in
+            .onChange(of: viewModel.settings.currentVideoIndex) { video in
                 withAnimation {
-                    proxy.scrollTo(currentVideo, anchor: .center)
+                    proxy.scrollTo(video, anchor: .center)
                 }
             }
         }

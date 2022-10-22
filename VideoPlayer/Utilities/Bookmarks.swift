@@ -37,7 +37,7 @@ import Foundation
 
             self.dump()
         } catch {
-            print("Error storing bookmarks")
+            print("Error storing bookmarks: \(error.localizedDescription)")
         }
     }
 
@@ -49,7 +49,7 @@ import Foundation
                 requiringSecureCoding: true
             ).write(to: path)
         } catch {
-            print("Error dumping bookmarks")
+            print("Error dumping bookmarks: \(error.localizedDescription)")
         }
     }
 
@@ -72,7 +72,7 @@ import Foundation
             }
             return bookmarks
         } catch {
-            print("Error loading bookmarks")
+            print("Error loading bookmarks: \(error.localizedDescription)")
             return nil
         }
     }
@@ -90,7 +90,7 @@ import Foundation
                 bookmarkDataIsStale: &isStale
             )
         } catch {
-            print("Error restoring bookmarks")
+            print("Error restoring bookmarks: \(error.localizedDescription)")
             restoredUrl = nil
         }
 

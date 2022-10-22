@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		DF00078428F35CBB00C992B4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00078328F35CBB00C992B4 /* SettingsView.swift */; };
+		DF16AF3729042CEF0015DBB1 /* MainViewModel+Hotkeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF16AF3629042CEF0015DBB1 /* MainViewModel+Hotkeys.swift */; };
+		DF16AF3929042D130015DBB1 /* MainViewModel+Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF16AF3829042D130015DBB1 /* MainViewModel+Folder.swift */; };
+		DF16AF3B29042D350015DBB1 /* MainViewModel+Playback.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF16AF3A29042D350015DBB1 /* MainViewModel+Playback.swift */; };
+		DF16AF3D29042DA00015DBB1 /* MainViewModel+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF16AF3C29042DA00015DBB1 /* MainViewModel+Video.swift */; };
 		DF3217FD28E615EA00FD3B8E /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3217FC28E615EA00FD3B8E /* Video.swift */; };
 		DF3B66E928EB0294005DBFE6 /* SwiftUIKeyPress in Frameworks */ = {isa = PBXBuildFile; productRef = DF3B66E828EB0294005DBFE6 /* SwiftUIKeyPress */; };
 		DFBD905128F2BAAD0049114B /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBD905028F2BAAD0049114B /* String+Subscript.swift */; };
@@ -25,6 +29,10 @@
 
 /* Begin PBXFileReference section */
 		DF00078328F35CBB00C992B4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		DF16AF3629042CEF0015DBB1 /* MainViewModel+Hotkeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewModel+Hotkeys.swift"; sourceTree = "<group>"; };
+		DF16AF3829042D130015DBB1 /* MainViewModel+Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewModel+Folder.swift"; sourceTree = "<group>"; };
+		DF16AF3A29042D350015DBB1 /* MainViewModel+Playback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewModel+Playback.swift"; sourceTree = "<group>"; };
+		DF16AF3C29042DA00015DBB1 /* MainViewModel+Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewModel+Video.swift"; sourceTree = "<group>"; };
 		DF3217FC28E615EA00FD3B8E /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		DFBD905028F2BAAD0049114B /* String+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Subscript.swift"; sourceTree = "<group>"; };
 		DFF020B728E23D7F0025C485 /* VideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +61,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF16AF3529042CC50015DBB1 /* MainViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DFF020C928E3904B0025C485 /* MainViewModel.swift */,
+				DF16AF3629042CEF0015DBB1 /* MainViewModel+Hotkeys.swift */,
+				DF16AF3829042D130015DBB1 /* MainViewModel+Folder.swift */,
+				DF16AF3A29042D350015DBB1 /* MainViewModel+Playback.swift */,
+				DF16AF3C29042DA00015DBB1 /* MainViewModel+Video.swift */,
+			);
+			path = MainViewModel;
+			sourceTree = "<group>";
+		};
 		DF3217FE28E615F300FD3B8E /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -93,7 +113,7 @@
 		DF32180228E6164A00FD3B8E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				DFF020C928E3904B0025C485 /* MainViewModel.swift */,
+				DF16AF3529042CC50015DBB1 /* MainViewModel */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -214,11 +234,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF16AF3B29042D350015DBB1 /* MainViewModel+Playback.swift in Sources */,
 				DFF020CA28E3904B0025C485 /* MainViewModel.swift in Sources */,
 				DFF020CE28E390B40025C485 /* Bookmarks.swift in Sources */,
+				DF16AF3929042D130015DBB1 /* MainViewModel+Folder.swift in Sources */,
 				DFF020D428E42EF50025C485 /* ButtonStyle+Scale.swift in Sources */,
 				DFF020CC28E390780025C485 /* Config.swift in Sources */,
+				DF16AF3D29042DA00015DBB1 /* MainViewModel+Video.swift in Sources */,
 				DFF020BD28E23D7F0025C485 /* ContentView.swift in Sources */,
+				DF16AF3729042CEF0015DBB1 /* MainViewModel+Hotkeys.swift in Sources */,
 				DFF020D228E390E40025C485 /* URL+isVideo.swift in Sources */,
 				DFF020BB28E23D7F0025C485 /* VideoPlayerApp.swift in Sources */,
 				DFF020D028E390CE0025C485 /* PlayerView.swift in Sources */,
