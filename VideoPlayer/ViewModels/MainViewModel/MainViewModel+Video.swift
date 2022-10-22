@@ -20,9 +20,14 @@ extension MainViewModel {
 
         group.enter()
 
-        folderVideos.enumerated().forEach { index, url in
-            addVideo(with: index, from: url)
-        }
+        folderVideos
+            .sorted {
+                $0.lastPathComponent < $1.lastPathComponent
+            }
+            .enumerated()
+            .forEach { index, url in
+                addVideo(with: index, from: url)
+            }
 
         group.wait()
 

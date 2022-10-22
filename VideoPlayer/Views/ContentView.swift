@@ -9,6 +9,8 @@ struct ContentView: View {
     @ObservedObject var viewModel: MainViewModel
 
     @State private var showVideos = false
+    @State private var showNextVideo = false
+    @State private var showPrevVideo = false
     @State private var keys = [UIKey]()
 
     var body: some View {
@@ -35,20 +37,84 @@ struct ContentView: View {
                         }
                     }
                 }
+                .overlay(alignment: .trailing) {
+                    Group {
+                        if showNextVideo {
+                            changeVideo(next: true)
+                                .transition(.opacity)
+                                .opacity(1)
+                        } else {
+                            changeVideo(next: true)
+                                .transition(.opacity)
+                                .opacity(0)
+                        }
+                    }
+                    .animation(.default, value: showNextVideo)
+                    .onContinuousHover { phase in
+                        switch phase {
+                            case .active(_):
+                                showNextVideo = true
+                            case .ended:
+                                showNextVideo = false
+                        }
+                    }
+                }
+                .overlay(alignment: .leading) {
+                    Group {
+                        if showPrevVideo {
+                            changeVideo(next: false)
+                                .transition(.opacity)
+                                .opacity(1)
+                        } else {
+                            changeVideo(next: false)
+                                .transition(.opacity)
+                                .opacity(0)
+                        }
+                    }
+                    .animation(.default, value: showPrevVideo)
+                    .onContinuousHover { phase in
+                        switch phase {
+                            case .active(_):
+                                showPrevVideo = true
+                            case .ended:
+                                showPrevVideo = false
+                        }
+                    }
+                }
         }
         .navigationTitle(viewModel.videos[viewModel.settings.currentVideoIndex].url.lastPathComponent)
-        .onChange(of: viewModel.settings.currentVideoIndex) { id in
-            viewModel.setVideo(for: id)
-        }
         .onKeyPress($keys)
         .onChange(of: keys) { newKeys in
             viewModel.keyPressed(newKeys.last!)
+        }
+        .onChange(of: viewModel.settings.currentVideoIndex) { id in
+            viewModel.setVideo(for: id)
         }
         .onChange(of: viewModel.player.rate) { newRate in
             if newRate == 1 {
                 viewModel.player.rate = viewModel.settings.currentRate
             }
         }
+    }
+
+    @ViewBuilder func changeVideo(next: Bool) -> some View {
+        Color.clear
+            .frame(width: 150)
+            .frame(maxHeight: .infinity)
+            .background(.black)
+            .mask(
+                LinearGradient(
+                    gradient: Gradient(colors: [.gray, .clear]),
+                    startPoint: next ? .trailing : .leading,
+                    endPoint: next ? .leading : .trailing)
+            )
+            .overlay {
+                Image(systemName: next ? "forward.fill" : "backward.fill")
+                    .font(.system(.largeTitle, design: .rounded, weight: .black))
+            }
+            .onTapGesture {
+                viewModel.settings.currentVideoIndex += next ? 1 : -1
+            }
     }
 
     // Not used 'cause i hate control buttons and love hotkeys
