@@ -17,8 +17,7 @@ extension MainViewModel {
     func skipForward() {
         player.seek(
             to: player.currentTime()
-            + CMTime(seconds: Double(settings.forward.rawValue),
-                     preferredTimescale: CMTimeScale(1))
+            + CMTime(seconds: Double(settings.forward.rawValue), preferredTimescale: 1)
         )
         play()
     }
@@ -26,8 +25,7 @@ extension MainViewModel {
     func skipBackward() {
         player.seek(
             to: player.currentTime()
-            - CMTime(seconds: Double(settings.backward.rawValue),
-                     preferredTimescale: CMTimeScale(1))
+            - CMTime(seconds: Double(settings.backward.rawValue), preferredTimescale: 1)
         )
         play()
     }
