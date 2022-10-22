@@ -19,7 +19,7 @@
 		DFF020CC28E390780025C485 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF020CB28E390780025C485 /* Config.swift */; };
 		DFF020CE28E390B40025C485 /* Bookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF020CD28E390B40025C485 /* Bookmarks.swift */; };
 		DFF020D028E390CE0025C485 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF020CF28E390CE0025C485 /* PlayerView.swift */; };
-		DFF020D228E390E40025C485 /* URL+isSmth.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF020D128E390E40025C485 /* URL+isSmth.swift */; };
+		DFF020D228E390E40025C485 /* URL+isVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF020D128E390E40025C485 /* URL+isVideo.swift */; };
 		DFF020D428E42EF50025C485 /* ButtonStyle+Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF020D328E42EF50025C485 /* ButtonStyle+Scale.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +37,7 @@
 		DFF020CB28E390780025C485 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		DFF020CD28E390B40025C485 /* Bookmarks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmarks.swift; sourceTree = "<group>"; };
 		DFF020CF28E390CE0025C485 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
-		DFF020D128E390E40025C485 /* URL+isSmth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+isSmth.swift"; sourceTree = "<group>"; };
+		DFF020D128E390E40025C485 /* URL+isVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+isVideo.swift"; sourceTree = "<group>"; };
 		DFF020D328E42EF50025C485 /* ButtonStyle+Scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonStyle+Scale.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,7 +65,7 @@
 		DF3217FF28E6160800FD3B8E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				DFF020D128E390E40025C485 /* URL+isSmth.swift */,
+				DFF020D128E390E40025C485 /* URL+isVideo.swift */,
 				DFF020D328E42EF50025C485 /* ButtonStyle+Scale.swift */,
 				DFBD905028F2BAAD0049114B /* String+Subscript.swift */,
 			);
@@ -219,7 +219,7 @@
 				DFF020D428E42EF50025C485 /* ButtonStyle+Scale.swift in Sources */,
 				DFF020CC28E390780025C485 /* Config.swift in Sources */,
 				DFF020BD28E23D7F0025C485 /* ContentView.swift in Sources */,
-				DFF020D228E390E40025C485 /* URL+isSmth.swift in Sources */,
+				DFF020D228E390E40025C485 /* URL+isVideo.swift in Sources */,
 				DFF020BB28E23D7F0025C485 /* VideoPlayerApp.swift in Sources */,
 				DFF020D028E390CE0025C485 /* PlayerView.swift in Sources */,
 				DFBD905128F2BAAD0049114B /* String+Subscript.swift in Sources */,
