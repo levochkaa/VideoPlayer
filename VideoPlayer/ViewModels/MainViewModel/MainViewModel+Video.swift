@@ -61,9 +61,4 @@ extension MainViewModel {
             }
         }
     }
-
-    func setVideo(for id: Int) {
-        player = AVPlayer(url: videos[id].url)
-        player.rate = settings.currentRate
-    }
 }

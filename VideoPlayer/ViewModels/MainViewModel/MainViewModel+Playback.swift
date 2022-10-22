@@ -4,6 +4,11 @@ import Foundation
 import AVKit
 
 extension MainViewModel {
+    func setVideo(for id: Int) {
+        player = AVPlayer(url: videos[id].url)
+        player.rate = settings.currentRate
+    }
+    
     func play() {
         player.play()
         isPlaying = true
