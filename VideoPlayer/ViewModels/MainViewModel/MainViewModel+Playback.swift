@@ -11,6 +11,7 @@ extension MainViewModel {
     
     func play() {
         player.play()
+        player.rate = settings.currentRate
         isPlaying = true
     }
 
