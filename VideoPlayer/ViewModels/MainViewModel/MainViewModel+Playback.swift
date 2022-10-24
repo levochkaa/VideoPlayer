@@ -6,12 +6,12 @@ import AVKit
 extension MainViewModel {
     func setVideo(for id: Int) {
         player = AVPlayer(url: videos[id].url)
+        player.defaultRate = settings.currentRate
         player.rate = settings.currentRate
     }
     
     func play() {
         player.play()
-        player.rate = settings.currentRate
         isPlaying = true
     }
 
@@ -37,6 +37,7 @@ extension MainViewModel {
     }
 
     func changeRate(to rate: Float) {
+        player.defaultRate = rate
         player.rate = rate
         settings.currentRate = rate
     }
