@@ -28,7 +28,9 @@ extension MainViewModel {
                     currentTime: 0,
                     currentRate: settings.currentRate,
                     videoOverlayOn: settings.videoOverlayOn,
-                    videoOverlayCharactersCount: settings.videoOverlayCharactersCount
+                    videoOverlayCharactersCount: settings.videoOverlayCharactersCount,
+                    videoTimePlayedOn: settings.videoTimePlayedOn,
+                    newVideoOnTheEnd: settings.newVideoOnTheEnd
                 )
                 bookmarks.store(url: url)
 

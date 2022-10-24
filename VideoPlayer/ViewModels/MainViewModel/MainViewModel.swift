@@ -10,15 +10,18 @@ class MainViewModel: ObservableObject {
     }
     @Published var videos = [Video]()
     @Published var isPlaying = false
+    @Published var videoPosition: Double = 0
+    @Published var videoDuration: Double = 0
     @Published var settings: Config {
         didSet { self.save() }
     }
 
     let bookmarks = BookMarks.restore() ?? BookMarks(data: [:])
     let group = DispatchGroup()
-    var timeObserverToken: Any?
     var videosCount = 0
     var tempVideos = [Video]()
+    var didPlayToEndObserver: Any?
+    var timeObserver: Any?
 
     init() {
         do {
@@ -52,9 +55,14 @@ class MainViewModel: ObservableObject {
         player.rate = settings.currentRate
         player.seek(to: CMTime(seconds: settings.currentTime, preferredTimescale: 1))
 
-        NotificationCenter.default.addObserver(forName: NSApplication.willTerminateNotification, object: nil, queue: .main) { _ in
+        NotificationCenter.default.addObserver(
+            forName: NSApplication.willTerminateNotification,
+            object: nil,
+            queue: .main) { _ in
             self.settings.currentTime = self.player.currentTime().seconds
         }
+
+        addObservers()
     }
 
     func save() {

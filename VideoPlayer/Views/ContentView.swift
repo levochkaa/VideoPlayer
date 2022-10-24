@@ -80,6 +80,23 @@ struct ContentView: View {
                         }
                     }
                 }
+                .overlay(alignment: .bottom) {
+                    if viewModel.settings.videoTimePlayedOn {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundColor(.gray)
+                            HStack {
+                                Rectangle()
+                                    .frame(width: 500 * viewModel.videoPosition, height: 10)
+                                    .foregroundColor(.white)
+                                Spacer(minLength: 0)
+                            }
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                        }
+                        .frame(width: 500, height: 10)
+                        .padding(.bottom, 20)
+                    }
+                }
         }
         .navigationTitle(viewModel.videos[viewModel.settings.currentVideoIndex].url.lastPathComponent)
         .onKeyPress($keys)

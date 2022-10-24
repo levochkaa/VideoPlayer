@@ -11,6 +11,8 @@ struct Config: Codable {
     var currentRate: Float = 1
     var videoOverlayOn: Bool = false
     var videoOverlayCharactersCount: Int = 3
+    var videoTimePlayedOn: Bool = true
+    var newVideoOnTheEnd: Bool = true
 }
 
 enum GoWard: Int, CaseIterable, Codable {

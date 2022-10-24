@@ -38,7 +38,10 @@ struct SettingsView: View {
                 Text("index")
             }
         } header: {
-            Text("Video")
+            HStack {
+                Text("Video")
+                Toggle("", isOn: $viewModel.settings.newVideoOnTheEnd)
+            }
         }
     }
 
@@ -51,7 +54,10 @@ struct SettingsView: View {
                 Text("seconds")
             }
         } header: {
-            Text("Time")
+            HStack {
+                Text("Time")
+                Toggle("", isOn: $viewModel.settings.videoTimePlayedOn)
+            }
         }
     }
 
