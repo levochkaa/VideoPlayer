@@ -61,6 +61,7 @@ extension MainViewModel {
             to: player.currentTime()
             + CMTime(seconds: Double(settings.forward.rawValue), preferredTimescale: 1)
         )
+        player.rate = settings.currentRate
         play()
     }
 
@@ -69,6 +70,7 @@ extension MainViewModel {
             to: player.currentTime()
             - CMTime(seconds: Double(settings.backward.rawValue), preferredTimescale: 1)
         )
+        player.rate = settings.currentRate
         play()
     }
 
