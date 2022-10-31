@@ -3,8 +3,10 @@
 import Foundation
 
 struct Config: Codable {
-    var backward: GoWard = .five
-    var forward: GoWard = .five
+//    var backward: GoWard = .five
+//    var forward: GoWard = .five
+    var backward: Double = 5
+    var forward: Double = 5
     var currentFolder: URL? = nil
     var currentVideoIndex: Int = 0
     var currentTime: Double = 0
@@ -15,29 +17,29 @@ struct Config: Codable {
     var newVideoOnTheEnd: Bool = true
 }
 
-enum GoWard: Int, CaseIterable, Codable {
-    case five = 5
-    case ten = 10
-    case fifteen = 15
-    case thirty = 30
-    case fourtyfive = 45
-    case sixty = 60
-    case seventyfive = 75
-    case ninety = 90
-
-    func nextCase() -> GoWard {
-        if self != .ninety,
-           let currentIndex = GoWard.allCases.firstIndex(of: self) {
-            return .allCases[currentIndex + 1]
-        }
-        return .ninety
-    }
-
-    func prevCase() -> GoWard {
-        if self != .five,
-           let currentIndex = GoWard.allCases.firstIndex(of: self) {
-            return .allCases[currentIndex - 1]
-        }
-        return .five
-    }
-}
+//enum GoWard: Int, CaseIterable, Codable {
+//    case five = 5
+//    case ten = 10
+//    case fifteen = 15
+//    case thirty = 30
+//    case fourtyfive = 45
+//    case sixty = 60
+//    case seventyfive = 75
+//    case ninety = 90
+//
+//    func nextCase() -> GoWard {
+//        if self != .ninety,
+//           let currentIndex = GoWard.allCases.firstIndex(of: self) {
+//            return .allCases[currentIndex + 1]
+//        }
+//        return .ninety
+//    }
+//
+//    func prevCase() -> GoWard {
+//        if self != .five,
+//           let currentIndex = GoWard.allCases.firstIndex(of: self) {
+//            return .allCases[currentIndex - 1]
+//        }
+//        return .five
+//    }
+//}

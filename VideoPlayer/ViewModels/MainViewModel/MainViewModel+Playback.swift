@@ -60,7 +60,7 @@ extension MainViewModel {
     func skipForward() {
         player.seek(
             to: player.currentTime()
-            + CMTime(seconds: Double(settings.forward.rawValue), preferredTimescale: 1)
+            + CMTime(seconds: settings.forward, preferredTimescale: 1)
         )
         play()
         player.rate = settings.currentRate
@@ -69,7 +69,7 @@ extension MainViewModel {
     func skipBackward() {
         player.seek(
             to: player.currentTime()
-            - CMTime(seconds: Double(settings.backward.rawValue), preferredTimescale: 1)
+            - CMTime(seconds: settings.backward, preferredTimescale: 1)
         )
         play()
         player.rate = settings.currentRate

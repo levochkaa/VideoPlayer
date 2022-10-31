@@ -10,6 +10,8 @@ struct ContentView: View {
     @State private var showVideos = false
     @State private var showNextVideo = false
     @State private var showPrevVideo = false
+//    @State private var showTimeVideo = false
+
     @State private var keys = [UIKey]()
 
     var body: some View {
@@ -26,6 +28,7 @@ struct ContentView: View {
                                 .transition(.move(edge: .top))
                         }
                     }
+
                     .animation(.default, value: showVideos)
                     .onContinuousHover { phase in
                         switch phase {
@@ -40,14 +43,13 @@ struct ContentView: View {
                     Group {
                         if showNextVideo {
                             changeVideo(next: true)
-                                .transition(.opacity)
                                 .opacity(1)
                         } else {
                             changeVideo(next: true)
-                                .transition(.opacity)
                                 .opacity(0)
                         }
                     }
+                    .transition(.opacity)
                     .animation(.default, value: showNextVideo)
                     .onContinuousHover { phase in
                         switch phase {
@@ -62,14 +64,13 @@ struct ContentView: View {
                     Group {
                         if showPrevVideo {
                             changeVideo(next: false)
-                                .transition(.opacity)
                                 .opacity(1)
                         } else {
                             changeVideo(next: false)
-                                .transition(.opacity)
                                 .opacity(0)
                         }
                     }
+                    .transition(.opacity)
                     .animation(.default, value: showPrevVideo)
                     .onContinuousHover { phase in
                         switch phase {
@@ -82,19 +83,7 @@ struct ContentView: View {
                 }
                 .overlay(alignment: .bottom) {
                     if viewModel.settings.videoTimePlayedOn {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 20)
-                                .foregroundColor(.gray)
-                            HStack {
-                                Rectangle()
-                                    .frame(width: 500 * viewModel.videoPosition, height: 10)
-                                    .foregroundColor(.white)
-                                Spacer(minLength: 0)
-                            }
-                            .clipShape(RoundedRectangle(cornerRadius: 20))
-                        }
-                        .frame(width: 500, height: 10)
-                        .padding(.bottom, 20)
+                        timeVideo
                     }
                 }
         }
@@ -111,6 +100,22 @@ struct ContentView: View {
                 viewModel.player.rate = viewModel.settings.currentRate
             }
         }
+    }
+
+    @ViewBuilder var timeVideo: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .foregroundColor(.gray)
+            HStack {
+                Rectangle()
+                    .frame(width: 500 * viewModel.videoPosition, height: 10)
+                    .foregroundColor(.white)
+                Spacer(minLength: 0)
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+        }
+        .frame(width: 500, height: 10)
+        .padding(.bottom, 20)
     }
 
     @ViewBuilder func changeVideo(next: Bool) -> some View {
@@ -131,33 +136,6 @@ struct ContentView: View {
             .onTapGesture {
                 viewModel.settings.currentVideoIndex += next ? 1 : -1
             }
-    }
-
-    // Not used 'cause i hate control buttons and love hotkeys
-    @ViewBuilder var controlButtons: some View {
-        HStack {
-            Button {
-                viewModel.skipBackward()
-            } label: {
-                Image(systemName: "gobackward.\(viewModel.settings.backward.rawValue)")
-            }
-
-            Button {
-                viewModel.isPlaying ? viewModel.pause() : viewModel.play()
-            } label: {
-                Image(systemName: viewModel.isPlaying ? "pause.fill" : "play.fill")
-                    .font(.system(.largeTitle, design: .rounded, weight: .black))
-                    .animation(.default, value: viewModel.isPlaying)
-            }
-
-            Button {
-                viewModel.skipForward()
-            } label: {
-                Image(systemName: "goforward.\(viewModel.settings.forward.rawValue)")
-            }
-        }
-        .font(.system(.title, design: .rounded, weight: .bold))
-        .buttonStyle(ScaleButtonStyle())
     }
 
     @ViewBuilder var videosScroll: some View {

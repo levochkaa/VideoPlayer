@@ -66,25 +66,33 @@ struct SettingsView: View {
             Stepper("Rate: \(viewModel.settings.currentRate.formatted())",
                     value: $viewModel.settings.currentRate,
                     step: 0.25,
-                    onEditingChanged: { bool in
+                    onEditingChanged: { _ in
                 viewModel.changeRate(to: viewModel.settings.currentRate)
             })
 
-            Stepper("Backward: -\(viewModel.settings.backward.rawValue) seconds",
-                    onIncrement: {
-                viewModel.settings.backward = viewModel.settings.backward.nextCase()
-            },
-                    onDecrement: {
-                viewModel.settings.backward = viewModel.settings.backward.prevCase()
-            })
+            HStack(spacing: 0) {
+                Text("Backward for")
 
-            Stepper("Forward: +\(viewModel.settings.forward.rawValue) seconds",
-                    onIncrement: {
-                viewModel.settings.forward = viewModel.settings.forward.nextCase()
-            },
-                    onDecrement: {
-                viewModel.settings.forward = viewModel.settings.forward.prevCase()
-            })
+                TextField("time",
+                          value: $viewModel.settings.backward,
+                          format: .number
+                )
+                .padding(.trailing, 10)
+
+                Text("seconds")
+            }
+
+            HStack(spacing: 0) {
+                Text("Forward for")
+
+                TextField("time",
+                          value: $viewModel.settings.forward,
+                          format: .number
+                )
+                .padding(.trailing, 10)
+
+                Text("seconds")
+            }
         } header: {
             Text("Video playback")
         }
