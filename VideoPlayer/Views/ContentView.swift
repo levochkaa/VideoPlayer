@@ -134,7 +134,10 @@ struct ContentView: View {
                     .font(.system(.largeTitle, design: .rounded, weight: .black))
             }
             .onTapGesture {
-                viewModel.settings.currentVideoIndex += next ? 1 : -1
+                if viewModel.settings.currentVideoIndex + 1 < viewModel.videosCount &&
+                    viewModel.settings.currentVideoIndex > 0 {
+                    viewModel.settings.currentVideoIndex += next ? 1 : -1
+                }
             }
     }
 

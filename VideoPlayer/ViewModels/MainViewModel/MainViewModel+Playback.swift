@@ -5,7 +5,7 @@ import AVKit
 
 extension MainViewModel {
     @objc func playerDidFinishPlaying() {
-        if settings.newVideoOnTheEnd {
+        if settings.newVideoOnTheEnd && settings.currentVideoIndex + 1 < videosCount {
             settings.currentVideoIndex += 1
         }
     }

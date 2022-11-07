@@ -51,6 +51,9 @@ class MainViewModel: ObservableObject {
 
     func onAppear() {
         videos = tempVideos.sorted(by: { $0.id < $1.id })
+        if settings.currentVideoIndex >= videosCount || settings.currentVideoIndex < 0 {
+            settings.currentVideoIndex = 0
+        }
         player = AVPlayer(url: videos[settings.currentVideoIndex].url)
         player.rate = settings.currentRate
         player.seek(to: CMTime(seconds: settings.currentTime, preferredTimescale: 1))
