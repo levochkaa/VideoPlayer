@@ -7,18 +7,10 @@ Some settings may be configured in a Settings view - `Cmd + ,`
 
 ## Screenshots
 
-<span>
-    <img src=".github/images/screenshots/videosScroll.png" alt="">
-</span>
-<span>
-    <img src=".github/images/screenshots/timePlayed.png" alt="">
-</span>
-<span>
-    <img src=".github/images/screenshots/other.png" alt="">
-</span>
-<span>
-    <img src=".github/images/screenshots/settings.png" alt="">
-</span>
+![](.github/images/screenshots/videosScroll.png)
+![](.github/images/screenshots/timePlayed.png)
+![](.github/images/screenshots/other.png)
+![](.github/images/screenshots/settings.png)
 
 ## P. S
 
