@@ -10,81 +10,28 @@ struct ContentView: View {
     @State private var showVideos = false
     @State private var showNextVideo = false
     @State private var showPrevVideo = false
-//    @State private var showTimeVideo = false
+    @State private var showTime = false
 
     @State private var keys = [UIKey]()
 
     var body: some View {
         VStack {
             CustomVideoPlayer(player: viewModel.player)
-                .overlay(alignment: .top) {
-                    Group {
-                        if showVideos {
-                            videosScroll
-                                .transition(.move(edge: .top))
-                        } else {
-                            videosScroll
-                                .offset(x: 0, y: -100)
-                                .transition(.move(edge: .top))
-                        }
-                    }
-
-                    .animation(.default, value: showVideos)
-                    .onContinuousHover { phase in
-                        switch phase {
-                            case .active(_):
-                                showVideos = true
-                            case .ended:
-                                showVideos = false
-                        }
-                    }
+                .customOverlay(isShown: $showVideos, alignment: .top) {
+                    videosScroll
+                        .transition(.move(edge: .top))
                 }
-                .overlay(alignment: .trailing) {
-                    Group {
-                        if showNextVideo {
-                            changeVideo(next: true)
-                                .opacity(1)
-                        } else {
-                            changeVideo(next: true)
-                                .opacity(0)
-                        }
-                    }
-                    .transition(.opacity)
-                    .animation(.default, value: showNextVideo)
-                    .onContinuousHover { phase in
-                        switch phase {
-                            case .active(_):
-                                showNextVideo = true
-                            case .ended:
-                                showNextVideo = false
-                        }
-                    }
-                }
-                .overlay(alignment: .leading) {
-                    Group {
-                        if showPrevVideo {
-                            changeVideo(next: false)
-                                .opacity(1)
-                        } else {
-                            changeVideo(next: false)
-                                .opacity(0)
-                        }
-                    }
-                    .transition(.opacity)
-                    .animation(.default, value: showPrevVideo)
-                    .onContinuousHover { phase in
-                        switch phase {
-                            case .active(_):
-                                showPrevVideo = true
-                            case .ended:
-                                showPrevVideo = false
-                        }
-                    }
-                }
-                .overlay(alignment: .bottom) {
+                .customOverlay(isShown: $showTime, alignment: .bottom) {
                     if viewModel.settings.videoTimePlayedOn {
                         timeVideo
+                            .transition(.move(edge: .bottom))
                     }
+                }
+                .customOverlay(isShown: $showNextVideo, alignment: .trailing) {
+                    changeVideo(next: true)
+                }
+                .customOverlay(isShown: $showPrevVideo, alignment: .leading) {
+                    changeVideo(next: false)
                 }
         }
         .navigationTitle(viewModel.videos[viewModel.settings.currentVideoIndex].url.lastPathComponent)
@@ -173,6 +120,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .padding(.horizontal)
             .onAppear {
                 withAnimation {
                     proxy.scrollTo(viewModel.settings.currentVideoIndex, anchor: .center)

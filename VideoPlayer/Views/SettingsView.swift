@@ -40,7 +40,7 @@ struct SettingsView: View {
         } header: {
             HStack {
                 Text("Video")
-                Toggle("", isOn: $viewModel.settings.newVideoOnTheEnd)
+                Toggle("Next video on the end", isOn: $viewModel.settings.newVideoOnTheEnd)
             }
         }
     }
@@ -56,7 +56,7 @@ struct SettingsView: View {
         } header: {
             HStack {
                 Text("Time")
-                Toggle("", isOn: $viewModel.settings.videoTimePlayedOn)
+                Toggle("Video time played", isOn: $viewModel.settings.videoTimePlayedOn)
             }
         }
     }
@@ -107,17 +107,20 @@ struct SettingsView: View {
         } header: {
             HStack {
                 Text("Video Overlay")
-                Toggle("", isOn: $viewModel.settings.videoOverlayOn)
+                Toggle("Overlay every video with its title first characters", isOn: $viewModel.settings.videoOverlayOn)
             }
         }
     }
 
     @ViewBuilder var otherSection: some View {
         Section {
-            Button {
+            Button("Open current folder") {
                 viewModel.openCurrentFolder()
-            } label: {
-                Text("Open current folder")
+            }
+            .buttonStyle(.link)
+            
+            Button("Select a new folder") {
+                viewModel.selectFolder()
             }
             .buttonStyle(.link)
 
